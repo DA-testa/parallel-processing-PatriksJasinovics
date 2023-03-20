@@ -1,9 +1,19 @@
 # python3
+# Patriks Jasinovics 221RDB082
 
 def parallel_processing(n, m, data):
-    output = []
-    # TODO: write the function for simulating parallel tasks, 
+    output = [] #output
+    time = [0] * n #finish time
+    # function for simulating parallel tasks, 
     # create the output pairs
+
+    for x in range(m):
+        thread = 0
+        for z in range(1, n):
+            if time[z] < time[thread]:
+                thread = z
+        output.append((thread, time[thread]))
+        time[thread] += data[x]
 
     return output
 
@@ -13,19 +23,22 @@ def main():
     # first line - n and m
     # n - thread count 
     # m - job count
-    n = 0
-    m = 0
+    n, m = map(int, input().split())
 
     # second line - data 
     # data - contains m integers t(i) - the times in seconds it takes any thread to process i-th job
-    data = []
+    data = list(map(int, input().split()))
 
-    # TODO: create the function
+    #print  results
+    
+    #  the function
     result = parallel_processing(n,m,data)
     
-    # TODO: print out the results, each pair in it's own line
-
+    # print out the results, each pair in it's own line
+    for thread, start_time in result:
+        print(thread, start_time)
 
 
 if __name__ == "__main__":
     main()
+
